@@ -1,8 +1,9 @@
 #!/bin/bash
 
-. @SLURM_LXC_HOME@/slurm-lxc.conf
+. @SLURM_LXC_HOME@/slxc.conf
 
 dhclient eth0
 su - $SLURM_USER -c "cp -R $MUNGE_PATH/var1/* $MUNGE_PATH/var/"
 su - $SLURM_USER -c "$MUNGE_PATH/etc/init.d/munge start"
+su - $SLURM_USER -c "mkdir -p $SLURM_PATH/var/spool/slurmd"
 /bin/bash

@@ -44,19 +44,4 @@ if [ "$machine_ok" = "0" ]; then
     exit 0
 fi
 
-# Check other mandatory files
-for i in $CHECK_DIRS; do
-    if [ ! -d "$i" ]; then
-        echo "No mandatory directory $i found. Check consistency!"
-        exit 1
-    fi
-done
-
-for i in $CHECK_FILES; do
-    if [ ! -f "$i" ]; then
-        echo "No mandatory file $i found. Check consistency!"
-        exit 1
-    fi
-done
-
-screen -d -m -S $mname -t $mname `which lxc-execute` -n $mname -f $CONFIG $MACHINE_INIT_SCRIPT
+lxc-stop -n $mname &

@@ -29,7 +29,7 @@ mname="$1"
 
 SLURM_LXC_HOME=`pwd`
 
-. ./slurm-lxc.conf
+. ./slxc.conf
 
 # Check nessesary dirs and file
 FSTAB_IN=$TEMPLATES/fstab.in
@@ -81,7 +81,11 @@ fi
 if [ ! -f "$FSTAB" ]; then
     # Form & Escape it
     MUNGE_VAR=`escape_path $MUNGE_PATH/var/`
-    cat $FSTAB_IN | sed -e "s/@MUNGEVAR@/$MUNGE_VAR/g" > $FSTAB
+    SLURM_VAR=`escape_path $SLURM_PATH/var/`
+    cat $FSTAB_IN \
+	| sed -e "s/@MUNGEVAR@/$MUNGE_VAR/g" \
+	| sed -e "s/@SLURMVAR@/$SLURM_VAR/g" \
+	> $FSTAB
 fi
 
 if [ ! -f "$MACHINE_INIT_SCRIPT" ]; then
