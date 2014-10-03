@@ -7,7 +7,6 @@ The set of scripts to easily deploy SLURM cluster on one machine using Linux Con
 The goal is SLURM development mostly. Any other ideas/usages :)?
 
 Prerequisites: screen tool.
-<p>
 1. Install Linux Containers (LXC)
 2. Configure LXC (for Ubuntu and Mint):
 2.1 Setup lxc networking (/etc/default/lxc-net):
@@ -43,5 +42,4 @@ Prerequisites: screen tool.
     ./slxc-stop-cluster.sh
     NOTE: that it may take a while. You can speedup this process by setting
 	LXC_SHUTDOWN_TIMEOUT in /etc/default/lxc (for Ubuntu and Mint)
-</p>
 That seems to be all. Enjoy!
