@@ -1,0 +1,2 @@
+tmpfs		@MUNGEVAR@				tmpfs	rw,size=10M	0 0
+tmpfs		/var/lib/dhcp/				tmpfs	rw,size=1M	0 0

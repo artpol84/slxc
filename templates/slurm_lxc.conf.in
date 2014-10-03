@@ -1,0 +1,5 @@
+lxc.utsname = @NAME@
+lxc.network.type = veth
+lxc.network.flags = up
+lxc.network.link = @LXCBRNAME@
+lxc.mount=@FSTAB@
