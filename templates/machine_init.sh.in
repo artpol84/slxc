@@ -6,4 +6,12 @@ dhclient eth0
 su - $SLURM_USER -c "cp -R $MUNGE_PATH/var1/* $MUNGE_PATH/var/"
 su - $SLURM_USER -c "$MUNGE_PATH/etc/init.d/munge start"
 su - $SLURM_USER -c "mkdir -p $SLURM_PATH/var/spool/slurmd"
+cfg_line=`cat $SLURM_PATH/etc/slurm.conf | grep ControlMachine`
+ctrl_machine=`echo $cfg_line | sed 's/ControlMachine=//'`
+this_host=`hostname`
+if [ "$ctrl_machine" = "$this_host" ]; then
+    su - $SLURM_USER -c "$SLURM_PATH/sbin/slurmctld -f $SLURM_PATH/etc/slurm.conf"
+else
+    su - $SLURM_USER -c "$SLURM_PATH/sbin/slurmd -f $SLURM_PATH/etc/slurm.conf"
+fi
 /bin/bash

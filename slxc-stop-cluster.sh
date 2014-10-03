@@ -11,5 +11,5 @@ if [ ! -f "$MACHINEFILE" ]; then
 fi
 
 for i in `cat $MACHINEFILE`; do 
-    ./slxc-run-machine.sh  $i
+    ./slxc-stop-machine.sh  $i
 done
