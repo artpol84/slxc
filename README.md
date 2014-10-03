@@ -7,14 +7,14 @@ The set of scripts to easily deploy SLURM cluster on one machine using Linux Con
 The goal is SLURM development mostly. Any other ideas/usages :)?
 
 Prerequisites: screen tool.
-
+<p>
 1. Install Linux Containers (LXC)
 2. Configure LXC (for Ubuntu and Mint):
-- Setup lxc networking (/etc/default/lxc-net):
+2.1 Setup lxc networking (/etc/default/lxc-net):
     USE_LXC_BRIDGE="true"
     LXC_DHCP_CONFILE=/etc/lxc/dnsmasq.conf
     LXC_DOMAIN="lxc"
-- Change /etc/lxc/dnsmasq.conf adding following line:
+2.2 Change /etc/lxc/dnsmasq.conf adding following line:
     conf-file=SLXC_PATH/build/dnsmasq.conf
 3. Install Munge in MUNGE_PATH (under someuser)
 4. Install SLURM in SLURM_PATH (under someuser)
@@ -43,5 +43,5 @@ Prerequisites: screen tool.
     ./slxc-stop-cluster.sh
     NOTE: that it may take a while. You can speedup this process by setting
 	LXC_SHUTDOWN_TIMEOUT in /etc/default/lxc (for Ubuntu and Mint)
-
+</p>
 That seems to be all. Enjoy!

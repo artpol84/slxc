@@ -2,10 +2,22 @@
 
 . @SLURM_LXC_HOME@/slxc.conf
 
+# Run DHCP client (I'm seing errors but it works anyway)
 dhclient eth0
-su - $SLURM_USER -c "cp -R $MUNGE_PATH/var1/* $MUNGE_PATH/var/"
+
+# Prepare var for Munge
+su - $SLURM_USER -c "mkdir -p $MUNGE_PATH/var/lib/munge/"
+su - $SLURM_USER -c "mkdir -p $MUNGE_PATH/var/log/munge/"
+su - $SLURM_USER -c "mkdir -p $MUNGE_PATH/var/run/munge/"
+su - $SLURM_USER -c "chmod -R 0755 $MUNGE_PATH/var/*"
+
+# start Munge
 su - $SLURM_USER -c "$MUNGE_PATH/etc/init.d/munge start"
+
+# Prepare var for SLURM
 su - $SLURM_USER -c "mkdir -p $SLURM_PATH/var/spool/slurmd"
+
+# Start SLURM. Distinguish between frontend and compute node
 cfg_line=`cat $SLURM_PATH/etc/slurm.conf | grep ControlMachine`
 ctrl_machine=`echo $cfg_line | sed 's/ControlMachine=//'`
 this_host=`hostname`
@@ -14,4 +26,6 @@ if [ "$ctrl_machine" = "$this_host" ]; then
 else
     su - $SLURM_USER -c "$SLURM_PATH/sbin/slurmd -f $SLURM_PATH/etc/slurm.conf"
 fi
+
+# Run bash to be able to issue commands
 /bin/bash
