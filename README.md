@@ -29,10 +29,15 @@ Prerequisites: screen tool.
 7. Set SLURM_USER to "someuser".
 
 8. Create cluster machines:
+    
     Create frontend first
+    
     $SLXC_PATH/slxc-new-node.sh frontend
+    
     Create node machines
+    
     for i in `seq 1 n`; do $SLX_PATH/slxc-new-node.sh cn$i; done
+
 9. [Optional] Add Munge and SLURM installation paths to your PATH env variable.
     And "export SLURM_CONF=$SLURM_PATH/etc/slurm.conf" to let sinfo/sbatch
     and others know how to reach slurmctld.
