@@ -16,15 +16,17 @@ su - $SLURM_USER -c "$MUNGE_PATH/etc/init.d/munge start"
 
 # Prepare var for SLURM
 su - $SLURM_USER -c "mkdir -p $SLURM_PATH/var/spool/slurmd"
+su - $SLURM_USER -c "mkdir -p $SLURM_PATH/var/log/"
 
 # Start SLURM. Distinguish between frontend and compute node
 cfg_line=`cat $SLURM_PATH/etc/slurm.conf | grep ControlMachine`
 ctrl_machine=`echo $cfg_line | sed 's/ControlMachine=//'`
 this_host=`hostname`
+
 if [ "$ctrl_machine" = "$this_host" ]; then
-    su - $SLURM_USER -c "$SLURM_PATH/sbin/slurmctld -f $SLURM_PATH/etc/slurm.conf"
+    su - $SLURM_USER -c "$SLURM_PATH/sbin/slurmctld -f $SLURM_PATH/etc/slurm.conf -L $SLURM_PATH/var/log/slurmctld.log"
 else
-    su - $SLURM_USER -c "$SLURM_PATH/sbin/slurmd -f $SLURM_PATH/etc/slurm.conf"
+    su - $SLURM_USER -c "$SLURM_PATH/sbin/slurmd -f $SLURM_PATH/etc/slurm.conf -L $SLURM_PATH/var/log/slurmd.log"
 fi
 
 # Run bash to be able to issue commands
