@@ -10,7 +10,7 @@ Prerequisites: screen tool.
 
 1. Install Linux Containers (LXC)
 
-2. Configure LXC (for Ubuntu and Mint):
+2. Configure LXC (the following is Ubuntu/Mint specific, for other distributions check its manuals to use the proper paths and configuration files names):
 
     2.1 Setup LXC networking (`/etc/default/lxc-net`): 
 
