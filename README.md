@@ -12,7 +12,7 @@ Prerequisites: screen tool.
 
 2. Configure LXC (for Ubuntu and Mint):
 
-    2.1 Setup lxc networking (`/etc/default/lxc-net`): 
+    2.1 Setup LXC networking (`/etc/default/lxc-net`): 
 
     `USE_LXC_BRIDGE="true"`
 
@@ -20,19 +20,19 @@ Prerequisites: screen tool.
 
     `LXC_DOMAIN="lxc"`
 
-    2.2 Change /etc/lxc/dnsmasq.conf adding following line:
+    2.2 Change `/etc/lxc/dnsmasq.conf` adding following line:
 
-    `conf-file=SLXC_PATH/build/dnsmasq.conf`
+    `conf-file=$SLXC_PATH/build/dnsmasq.conf`
 
 3. Install Munge in `MUNGE_PATH` (under `someuser`)
 
 4. Install SLURM in `SLURM_PATH` (under `someuser`)
 
-5. Configure SLURM and put its configuration in `$SLURM_PATH/etc/slurm.conf`
+5. Configure SLURM and put its configuration in `$SLURM_PATH/etc/slurm.conf`.
 
-6. Put SLURM and Munge installation paths to `$SLURM_SLXC/slxc.conf`
+6. Put SLURM and Munge installation paths to `$SLXC_PATH/slxc.conf`.
 
-7. Set `SLURM_USER` to `someuser`.
+7. Set `SLURM_USER` to `someuser` in `$SLXC_PATH/slxc.conf`.
 
 8. Create cluster machines:
     
@@ -44,12 +44,13 @@ Prerequisites: screen tool.
     
     `for i in $(seq 1 n); do $SLX_PATH/slxc-new-node.sh cn$i; done`
 
-9. [Optional] Add Munge and SLURM installation paths to your PATH env variable.
+9. [Optional] Add Munge and SLURM installation paths to your PATH environment variable.
     And `export SLURM_CONF=$SLURM_PATH/etc/slurm.conf` to let `sinfo`, `sbatch`
-    and others know how to reach slurmctld.
+    and others know how to reach `slurmctld`.
 
 10. Restart lxc-net service (in Ubuntu and Mint):
-    sudo service lxc-net restart
+
+    `sudo service lxc-net restart`
 
 11. Start your cluster:
     
@@ -61,7 +62,7 @@ Prerequisites: screen tool.
     
     `sudo lxc-ls --active`
     
-    Both tools should show all your machines
+    Both tools should show all your virtual "machines" running.
 
 13. Now you can attach to any machine with
     
