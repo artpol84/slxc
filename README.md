@@ -12,9 +12,9 @@ Prerequisites: screen tool.
 
 2. Configure LXC (for Ubuntu and Mint):
 2.1 Setup lxc networking (/etc/default/lxc-net):
-- USE_LXC_BRIDGE="true"
-- LXC_DHCP_CONFILE=/etc/lxc/dnsmasq.conf
-- LXC_DOMAIN="lxc"
+`USE_LXC_BRIDGE="true"
+LXC_DHCP_CONFILE=/etc/lxc/dnsmasq.conf
+LXC_DOMAIN="lxc"`
 2.2 Change /etc/lxc/dnsmasq.conf adding following line:
 - conf-file=SLXC_PATH/build/dnsmasq.conf
 
