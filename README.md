@@ -34,21 +34,21 @@ Prerequisites: screen tool.
 
 7. Set `SLURM_USER` to `someuser` in `$SLXC_PATH/slxc.conf`.
 
-8. Create cluster machines:
+8. Create cluster machines with `slxc-new-node.sh`. The only argument of `slxc-new-node.sh` is machine hostname. NOTE that you must use the same frontend/compute nodes names as in `$SLURM_PATH/etc/slurm.conf`.
     
-    Create frontend first
+    Create frontend first (let's call it "frontend" for example ):
     
     `$SLXC_PATH/slxc-new-node.sh frontend`
     
-    Create node machines
+    Create node machines (cn1, cn2, ..., cnN):
     
-    `for i in $(seq 1 n); do $SLX_PATH/slxc-new-node.sh cn$i; done`
+    `for i in $(seq 1 N); do $SLX_PATH/slxc-new-node.sh cn$i; done`
 
 9. [Optional] Add Munge and SLURM installation paths to your PATH environment variable.
     And `export SLURM_CONF=$SLURM_PATH/etc/slurm.conf` to let `sinfo`, `sbatch`
     and others know how to reach `slurmctld`.
 
-10. Restart lxc-net service (in Ubuntu and Mint):
+10. Restart lxc-net service (for Ubuntu/Mint):
 
     `sudo service lxc-net restart`
 
