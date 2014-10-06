@@ -26,9 +26,9 @@ LXC_DOMAIN="lxc"`
 
 4. Install SLURM in SLURM_PATH (under someuser)
 
-5. Configure SLURM and put its configuration in $SLURM_PATH/etc/slurm.conf
+5. Configure SLURM and put its configuration in `$SLURM_PATH/etc/slurm.conf`
 
-6. Put SLURM and Munge installation paths to $SLURM_SLXC/slxc.conf
+6. Put SLURM and Munge installation paths to `$SLURM_SLXC/slxc.conf`
 
 7. Set SLURM_USER to "someuser".
 
@@ -40,29 +40,34 @@ LXC_DOMAIN="lxc"`
     
     Create node machines
     
-    for i in `seq 1 n`; do $SLX_PATH/slxc-new-node.sh cn$i; done
+    `for i in \`seq 1 n\`; do $SLX_PATH/slxc-new-node.sh cn$i; done`
 
 9. [Optional] Add Munge and SLURM installation paths to your PATH env variable.
-    And "export SLURM_CONF=$SLURM_PATH/etc/slurm.conf" to let sinfo/sbatch
+    And `export SLURM_CONF=$SLURM_PATH/etc/slurm.conf` to let `sinfo`, `sbatch`
     and others know how to reach slurmctld.
 
 10. Restart lxc-net service (in Ubuntu and Mint):
     sudo service lxc-net restart
 
 11. Start your cluster:
-    sudo ./slxc-run-cluster.sh
+    `sudo ./slxc-run-cluster.sh`
 
 12. Verify that everything is OK:
-    sudo screen -ls
-    sudo lxc-ls --active
-    Both tools should show all your machines
+    
+    `sudo screen -ls`
+    
+    `sudo lxc-ls --active`
+    
+Both tools should show all your machines
 
 13. Now you can attach to any machine with
-    sudo lxc-attach -n $nodename
+    
+    `sudo lxc-attach -n $nodename`
 
 14. To shutdown your cluster use
-    ./slxc-stop-cluster.sh
+
+    `./slxc-stop-cluster.sh`
     NOTE: that it may take a while. You can speedup this process by setting
-     LXC_SHUTDOWN_TIMEOUT in /etc/default/lxc (for Ubuntu and Mint)
+`LXC_SHUTDOWN_TIMEOUT` in `/etc/default/lxc` (for Ubuntu and Mint)
 
 That seems to be all. Enjoy!
