@@ -15,7 +15,6 @@ Prerequisites: screen tool.
     2.1 Setup lxc networking (`/etc/default/lxc-net`): 
 
     `USE_LXC_BRIDGE="true"`
-
     `LXC_DHCP_CONFILE=/etc/lxc/dnsmasq.conf`
 
     `LXC_DOMAIN="lxc"`
