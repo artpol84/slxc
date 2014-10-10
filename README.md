@@ -27,25 +27,18 @@ Prerequisites: screen tool.
     * `$SLXC_PATH/slxc-new-node.sh frontend`
   - Create node machines (cn1, cn2, ..., cnN):
     * `$ for i in $(seq 1 N); do $SLX_PATH/slxc-new-node.sh cn$i; done`
-
 9. [Optional] Add Munge and SLURM installation paths to your PATH environment variable.
     And `export SLURM_CONF=$SLURM_PATH/etc/slurm.conf` to let `sinfo`, `sbatch`
     and others know how to reach `slurmctld`.
-
 10. Restart lxc-net service (for Ubuntu/Mint):
   - `$ sudo service lxc-net restart`
-
 11. Start your cluster:
   - `$ sudo ./slxc-run-cluster.sh`
-
 12. Verify that everything is OK (both tools should show all your virtual "machines" running):
   - `$ sudo screen -ls`
   - `$ sudo lxc-ls --active`
- 
-
 13. Now you can attach to any machine with
   - `$ sudo lxc-attach -n $nodename`
-
 14. To shutdown your cluster use
   - `$ ./slxc-stop-cluster.sh`
   - NOTE: that it may take a while. You can speedup this process by setting
