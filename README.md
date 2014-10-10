@@ -28,7 +28,7 @@ Prerequisites: screen tool.
 
 4. Install SLURM in `SLURM_PATH` (under `someuser`)
 
-5. Configure SLURM and put its configuration in `$SLURM_PATH/etc/slurm.conf`.
+5. Configure SLURM and put its configuration in `$SLURM_PATH/etc/slurm.conf`. While configuring select your favorite domain names for the frontend and compute nodes. Here we will use `frontend` and `cnX`.
 
 6. Put SLURM and Munge installation paths to `$SLXC_PATH/slxc.conf`.
 
