@@ -6,10 +6,9 @@ SLURM in Linux Containers
 The set of scripts to easily deploy SLURM cluster on one machine using Linux Containers.
 The goal is SLURM development mostly. Any other ideas/usages :)?
 
-Prerequisites: screen tool.
+Prerequisites: `screen` tool.
 
 1. Install Linux Containers (LXC)
-
 2. Configure LXC (the following is Ubuntu/Mint specific, for other distributions check its manuals to use the proper paths and configuration files names):
   - Setup LXC networking (`/etc/default/lxc-net`): 
     * `USE_LXC_BRIDGE="true"`
