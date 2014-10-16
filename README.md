@@ -17,7 +17,7 @@ Prerequisites: `screen` tool.
   - Change `/etc/lxc/dnsmasq.conf` adding following line:
     * `conf-file=$SLXC_PATH/build/dnsmasq.conf`
 3. Install **Munge** in `MUNGE_PATH` (under `someuser`). **NOTE!** that *munge-0.5.11* has problems with user-defined prefix installation (see https://code.google.com/p/munge/issues/detail?id=34 for the details). In the mentioned issue report you may find the patch that temporally fixes this problem. Or you can use more recent versions that have this problem fixed.
-4. Install **SLURM** in `SLURM_PATH` (under `someuser`)
+4. Install **SLURM** in `SLURM_PATH` (under `someuser`). Make additional directorys in slurm's prefix: `mkdir $SLURM_PATH/var $SLURM_PATH/etc`
 5. Configure SLURM and put its configuration in `$SLURM_PATH/etc/slurm.conf`. While configuring select your favorite domain names for the frontend and compute nodes. Here we will use `frontend` and `cnX`.
 6. Put SLURM and Munge installation paths to `$SLXC_PATH/slxc.conf`.
 7. Set `SLURM_USER` to `someuser` in `$SLXC_PATH/slxc.conf`.
