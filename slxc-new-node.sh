@@ -78,6 +78,15 @@ if [ ! -d "$CONTAINERS_DIR" ]; then
     mkdir -p "$CONTAINERS_DIR"
 fi
 
+if [ ! -d $SLURM_PATH/var ]; then
+    mkdir $SLURM_PATH/var 
+fi
+
+if [ ! -f $SLURM_PATH/etc/slurm.conf ]; then
+    echo "No $SLURM_PATH/etc/slurm.conf file found. Configure SLURM first"
+    exit 1
+fi
+
 if [ ! -f "$FSTAB" ]; then
     # Form & Escape it
     MUNGE_VAR=`escape_path $MUNGE_PATH/var/`
