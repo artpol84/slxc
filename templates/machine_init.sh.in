@@ -17,6 +17,8 @@ su - $SLURM_USER -c "$MUNGE_PATH/etc/init.d/munge start"
 # Prepare var for SLURM
 su - $SLURM_USER -c "mkdir -p $SLURM_PATH/var/spool/slurmd"
 su - $SLURM_USER -c "mkdir -p $SLURM_PATH/var/log/"
+su - $SLURM_USER -c "chmod -R g+rwx $SLURM_PATH/var/spool/"
+su - $SLURM_USER -c "chmod -R o+rwx $SLURM_PATH/var/spool/"
 
 # Start SLURM. Distinguish between frontend and compute node
 cfg_line=`cat $SLURM_PATH/etc/slurm.conf | grep ControlMachine`
