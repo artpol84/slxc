@@ -1,3 +1,4 @@
+lxc.rootfs = /
 lxc.utsname = @NAME@
 lxc.network.type = veth
 lxc.network.flags = up
