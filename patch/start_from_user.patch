@@ -1,0 +1,15 @@
+diff --git a/src/slurmd/slurmstepd/mgr.c b/src/slurmd/slurmstepd/mgr.c
+index c7eeb29..cd2a528 100644
+--- a/src/slurmd/slurmstepd/mgr.c
++++ b/src/slurmd/slurmstepd/mgr.c
+@@ -2411,8 +2411,8 @@ _drop_privileges(stepd_step_rec_t *job, bool do_setuid,
+ 	/*
+ 	 * No need to drop privileges if we're not running as root
+ 	 */
+-	if (getuid() != (uid_t) 0)
+-		return SLURM_SUCCESS;
++    //if (getuid() != (uid_t) 0)
++    //	return SLURM_SUCCESS;
+ 
+ 	if (setegid(job->gid) < 0) {
+ 		error("setegid: %m");
