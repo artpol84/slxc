@@ -16,6 +16,7 @@ Prerequisites: `screen` tool.
     * `LXC_DOMAIN="lxc"`
   - Change `/etc/lxc/dnsmasq.conf` adding following line:
     * `conf-file=$SLXC_PATH/build/dnsmasq.conf`
+  - If facing problems, check https://github.com/lxc/lxc/pull/285/files (look in /etc/apparmor.d/abstractions/lxc/start-container)
 3. Install **Munge** in `MUNGE_PATH` (under `someuser`). **NOTE!** that *munge-0.5.11* has problems with user-defined prefix installation (see https://code.google.com/p/munge/issues/detail?id=34 for the details). In the mentioned issue report you may find the patch that temporally fixes this problem. Or you can use more recent versions that have this problem fixed.
 4. [Optional] If the **SLURM_USER** is not root and you plan to submit jobs as user **USER1** != **SLURM_USER**:
   - Apply the patch from SLURM directory:
