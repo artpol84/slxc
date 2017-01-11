@@ -46,7 +46,10 @@ Prerequisites: `screen` tool.
   - `$ sudo lxc-ls --active`
 15. Now you can attach to any machine with
   - `$ sudo lxc-attach -n $nodename`
-16. To shutdown your cluster use
+16. [Optional] If you plan use PMIx plugin, then required to be set the temporary directory of PMIx through value of environment **SLURM_PMIX_TMPDIR**. This path shouldn't be equal to shared directory between virtual containers. The env required to set before `srun` use.
+  - Set PMIx tmp dir:
+    * `$ export SLURM_PMIX_TMPDIR=$SLURM_PATH/var/spool`
+17. To shutdown your cluster use
   - `$ ./slxc-stop-cluster.sh`
   - NOTE: that it may take a while. You can speedup this process by setting
 `LXC_SHUTDOWN_TIMEOUT` in `/etc/default/lxc` (for Ubuntu and Mint)
