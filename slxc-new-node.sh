@@ -14,7 +14,11 @@ function network_add()
     fi
     num=`cat $IPFILE`
     echo "dhcp-host=$1,$IPBASE.$num" >> $DNSMASQFILE
-    echo "lxc.network.hwaddr = $MACBASE:$num" >> $CONFIG
+    if [ "$new_cntr_fmt" = 1 ]; then
+        echo "lxc.net.0.hwaddr = $MACBASE:$num" >> $CONFIG
+    else
+        echo "lxc.network.hwaddr = $MACBASE:$num" >> $CONFIG
+    fi
     num=`expr $num + 1`
     echo "$num" > $IPFILE
     echo "Restart lxc-net service to apply changes!"
@@ -33,7 +37,21 @@ SLURM_LXC_HOME=`pwd`
 
 # Check nessesary dirs and file
 FSTAB_IN=$TEMPLATES/fstab.in
-SLURM_LXC_CONF_IN=$TEMPLATES/slurm_lxc.conf.in
+
+# Detect lxc.container.config format
+new_cntr_fmt=1
+tmp=`man lxc.container.conf | grep "lxc.utsname"`
+if [ -n "$tmp" ]; then
+    # Use the old format
+    new_cntr_fmt=0
+fi
+
+if [ "$new_cntr_fmt" = 1 ]; then
+    SLURM_LXC_CONF_IN=$TEMPLATES/slurm_lxc.conf.new.in
+else
+    SLURM_LXC_CONF_IN=$TEMPLATES/slurm_lxc.conf.in
+fi
+
 MACHINE_INIT_SCRIPT_IN=$TEMPLATES/machine_init.sh.in
 
 CHECK_DIRS="$BUILD $TEMPLATES"

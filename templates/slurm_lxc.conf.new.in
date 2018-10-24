@@ -1,0 +1,6 @@
+lxc.rootfs.path = /
+lxc.uts.name = @NAME@
+lxc.net.0.type = veth
+lxc.net.0.flags = up
+lxc.net.0.link = @LXCBRNAME@
+lxc.mount.fstab = @FSTAB@
