@@ -4,3 +4,4 @@ lxc.net.0.type = veth
 lxc.net.0.flags = up
 lxc.net.0.link = @LXCBRNAME@
 lxc.mount.fstab = @FSTAB@
+lxc.mount.entry = @HOSTS@ etc/hosts none ro,bind 0 0

@@ -13,7 +13,8 @@ function network_add()
 	exit 1
     fi
     num=`cat $IPFILE`
-    echo "dhcp-host=$1,$IPBASE.$num" >> $DNSMASQFILE
+    echo "dhcp-host=$1,$IPBASE.$num,$1" >> $DNSMASQFILE
+    echo -e "$IPBASE.$num\t$1" >> $HOSTS
     if [ "$new_cntr_fmt" = 1 ]; then
         echo "lxc.net.0.hwaddr = $MACBASE:$num" >> $CONFIG
     else
@@ -85,6 +86,7 @@ cd $bkp
 # Create nessesary files and directorys if not exist
 CONTAINERS_DIR="$BUILD/containers"
 FSTAB="$BUILD/fstab"
+HOSTS="$BUILD/hosts"
 MACHINE_INIT_SCRIPT="$BUILD/machine_init.sh"
 CONFIG="$CONTAINERS_DIR/$mname.conf"
 MACHINEFILE="$BUILD/machines"
@@ -113,6 +115,11 @@ if [ ! -f "$FSTAB" ]; then
 	| sed -e "s/@MUNGEVAR@/$MUNGE_VAR/g" \
 	| sed -e "s/@SLURMVAR@/$SLURM_VAR/g" \
 	> $FSTAB
+fi
+
+if [ ! -f "$HOSTS" ]; then
+    # Use existing hosts file as the basis
+    cp /etc/hosts $HOSTS
 fi
 
 if [ ! -f "$MACHINE_INIT_SCRIPT" ]; then
@@ -147,10 +154,12 @@ for i in `cat $MACHINEFILE`; do
 done
 
 FSTAB_ESC=`escape_path "$FSTAB"`
+HOSTS_ESC=`escape_path "$HOSTS"`
 cat $SLURM_LXC_CONF_IN | \
 	sed -e "s/@NAME@/$mname/g" | \
-	sed -e "s/@LXCBRNAME@/$LXC_BRIDGE_NAME/g" |
-	sed -e "s/@FSTAB@/$FSTAB_ESC/g" \
+	sed -e "s/@LXCBRNAME@/$LXC_BRIDGE_NAME/g" | \
+	sed -e "s/@FSTAB@/$FSTAB_ESC/g" | \
+	sed -e "s/@HOSTS@/$HOSTS_ESC/g" \
 	> $CONFIG
 
 echo "$mname" >> $MACHINEFILE
